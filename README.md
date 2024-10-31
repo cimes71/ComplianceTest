@@ -16,4 +16,4 @@ config file (not included in the repo) defines these sections
 
 [Data]
 
-While this code is public, it will need to be customized.  I chose to add the ex paths to the configs because it makes the code a bit cleaner and you don't have to worry about adding escape characters.
+While this code is public, it will need to be customized.  I chose to add the xpaths to the configs because it makes the code a bit cleaner, makes it more obvious where the paths lead, and you don't have to worry about adding escape characters.
