@@ -1,6 +1,6 @@
 This program uses the Selenium Webdriver to create a BOT.
 
-The util package contains a configs.py that declares some constants used pulled from the OS environment.  
+The util package contains a configs.py that declares some constants used to pull from the OS environment.  
 
 It also reads in a .ini file to pull xpath information used in the BOT navigation, and used to define where to enter data, and what data to get from the responses.
 
