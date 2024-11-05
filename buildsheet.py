@@ -6,7 +6,6 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
-SAMPLE_SPREADSHEET_SHEET_ID = '1_AuqQbTAwZf0EfM5Zu4e_VCjze4Rqn3JwEryGOXFB6M'
 SAMPLE_RANGE_NAME = 'Sheet1!A1'
 
 class BuildSheet:

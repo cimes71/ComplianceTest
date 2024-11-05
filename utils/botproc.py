@@ -3,7 +3,6 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 
-
 class BotProc:
 
     def __init__(self, config):
