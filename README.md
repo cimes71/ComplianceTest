@@ -8,6 +8,8 @@ Currently, BotProc creates the driver, peforms a login function, and processes a
 
 config file (not included in the repo) defines these sections
 
+[Output-Target]
+
 [Login]
 
 [Navigation]
