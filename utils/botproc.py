@@ -6,10 +6,10 @@ import time
 
 class BotProc:
 
-    def __init__(self):
+    def __init__(self, config):
         self.portal_url = const.RM_PORTAL
         print(self.portal_url)
-        self.configs = const.read_config()
+        self.configs = config
         self.driver = self.get_driver()
 
 
@@ -35,17 +35,54 @@ class BotProc:
         print(self.driver.current_url)
 
     def process_search_list(self, search_list):
-        self.driver.find_element(by="xpath", value=self.configs['step_one']).click()
-        self.driver.find_element(by="xpath", value=self.configs['step_two']).click()
+        #self.driver.find_element(by="xpath", value=self.configs['step_one']).click()
+        #self.driver.find_element(by="xpath", value=self.configs['step_two']).click()
+        pd_list = []
+
 
         for s in search_list:
+
+            self.driver.find_element(by="xpath", value=self.configs['step_one']).click()
+            self.driver.find_element(by="xpath", value=self.configs['step_two']).click()
+
             self.driver.find_element(by="xpath", value=self.configs['search_criteria']).send_keys(s + Keys.RETURN)
             time.sleep(2)
             percentage = self.driver.find_element(by="xpath", value=self.configs['compliance_perc']).text
             comp_status = self.driver.find_element(by="xpath", value=self.configs['compliance_status']).get_attribute("class")
             time.sleep(2)
-            self.driver.find_element(by="xpath", value="//*[@id=\"q\"]").clear()
-            print(f"Name: {s}  {comp_status}  Percentage: {percentage}")
+            self.driver.find_element(by="xpath", value=self.configs['search_criteria']).clear()
+            comp_parsed = comp_status.split(" ")
+            sn = self.process_comp_list(s)
+
+            pd_dict = {
+                "Name" : s,
+                "Compliance" : comp_parsed[2],
+                "Percentage" : percentage,
+                "SerialNumber" : sn
+
+            }
+
+            pd_list.append(pd_dict)
+
+            print(f"Name: {s}  {comp_parsed[2]}  Percentage: {percentage} Serial Number: {sn}")
+        return pd_list
+
+    def process_comp_list(self, s):
+        self.driver.find_element(by="xpath", value=self.configs['step_one']).click()
+        self.driver.find_element(by="xpath", value="//*[@id=\"all-patients-link\"]").click()
+        self.driver.find_element(by="xpath", value=self.configs['search_criteria']).send_keys(s + Keys.RETURN)
+        time.sleep(2)
+        self.driver.find_element(by="xpath", value="//*[@id=\"patientsFilter\"]/tbody/tr/td[2]/a").click()
+        time.sleep(1)
+        self.driver.find_element(by="xpath", value="//*[@id=\"prescription-tab\"]").click()
+        sn = self.driver.find_element(by="xpath", value="//*[@id=\"serialNumber\"]").text
+        time.sleep(1)
+        #print(sn)
+        return sn
+
+
+
+
 
 
 

@@ -16,7 +16,8 @@ def read_config():
         step_two = config.get('Navigation', 'step_two')
         search_criteria = config.get('Search', 'search_criteria')
         compliance_perc = config.get('Data', 'compliance_perc')
-        compliance_status = config.get('Data','compliance_status' )
+        compliance_status = config.get('Data','compliance_status')
+        output_spreadsheet = config.get('Output-Target', "output_spreadsheet")
 
 
 
@@ -27,7 +28,8 @@ def read_config():
         'step_two' : step_two,
         'search_criteria': search_criteria,
         'compliance_perc': compliance_perc,
-        'compliance_status': compliance_status
+        'compliance_status': compliance_status,
+        'output_spreadsheet' : output_spreadsheet
     }
 
     return config_values
